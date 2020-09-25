@@ -19,6 +19,9 @@ char Current_And_Man_Letter_Value = 'A';			// Current Letter
 // 3. And :
 int The_And_Position_Row;							// Row
 int The_And_Position_Column;						// Column
+// 4. Pressed Key :
+char c;												// pressed key from the USER.
+
 
 // ********************************************************************************************************************
 // The frame functions
@@ -57,6 +60,78 @@ void initialize_and_man()
 	Total_Array[And_Man_Position_Row][And_Man_Position_Column] = Current_And_Man_Letter_Value;
 }
 
+
+// ********************************************************************************************************************
+// The control functions 
+void man_go_right()
+{
+	char temp = Total_Array[And_Man_Position_Row][And_Man_Position_Column];
+	Total_Array[And_Man_Position_Row][And_Man_Position_Column] = ' ';
+
+	if (And_Man_Position_Column != (columns - 2))
+		Total_Array[And_Man_Position_Row][++And_Man_Position_Column] = temp;
+	else
+	{
+		And_Man_Position_Column = 1;
+		Total_Array[And_Man_Position_Row][And_Man_Position_Column] = temp;
+	}
+}
+
+void man_go_left()
+{
+	char temp = Total_Array[And_Man_Position_Row][And_Man_Position_Column];
+	Total_Array[And_Man_Position_Row][And_Man_Position_Column] = ' ';
+
+	if (And_Man_Position_Column != 1)
+		Total_Array[And_Man_Position_Row][--And_Man_Position_Column] = temp;
+	else
+	{
+		And_Man_Position_Column = columns - 2;
+		Total_Array[And_Man_Position_Row][And_Man_Position_Column] = temp;
+	}
+}
+
+void man_go_up()
+{
+	char temp = Total_Array[And_Man_Position_Row][And_Man_Position_Column];
+	Total_Array[And_Man_Position_Row][And_Man_Position_Column] = ' ';
+
+	if (And_Man_Position_Row != 1)
+		Total_Array[--And_Man_Position_Row][And_Man_Position_Column] = temp;
+	else
+	{
+		And_Man_Position_Row = rows - 2;
+		Total_Array[And_Man_Position_Row][And_Man_Position_Column] = temp;
+	}
+}
+
+void man_go_down()
+{
+	char temp = Total_Array[And_Man_Position_Row][And_Man_Position_Column];
+	Total_Array[And_Man_Position_Row][And_Man_Position_Column] = ' ';
+
+	if (And_Man_Position_Row != (rows - 2))
+		Total_Array[++And_Man_Position_Row][And_Man_Position_Column] = temp;
+	else
+	{
+		And_Man_Position_Row = 1;
+		Total_Array[And_Man_Position_Row][And_Man_Position_Column] = temp;
+	}
+}
+
+void check_pressed_key()
+{
+	if (c == 'D' || c == 'd')
+		man_go_right();
+	if (c == 'A' || c == 'a')
+		man_go_left();
+	if (c == 'W' || c == 'w')
+		man_go_up();
+	if (c == 'S' || c == 's')
+		man_go_down();
+}
+
+
 // ********************************************************************************************************************
 // Other functions ...
 void show_game()
@@ -67,6 +142,11 @@ void show_game()
 			cout << Total_Array[i][j];
 		cout << endl;
 	}
+}
+
+void clear_console()
+{
+	system("cls");
 }
 
 // ********************************************************************************************************************
@@ -81,7 +161,16 @@ int main()
 	add_random_food();
 	initialize_and_man();
 
-	show_game();
+	// now we can start playing ...
+	while (Current_And_Man_Letter_Value != 'E')
+	{
+		show_game();
+		c = _getch();
+		check_pressed_key();
+
+		clear_console();
+	}
+
 
 	return 0;
 }

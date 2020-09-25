@@ -21,6 +21,8 @@ int The_And_Position_Row;							// Row
 int The_And_Position_Column;						// Column
 // 4. Pressed Key :
 char c;												// pressed key from the USER.
+// 5. Setting the Score :
+int Score = 0;										// Score of the game
 
 
 // ********************************************************************************************************************
@@ -134,6 +136,16 @@ void check_pressed_key()
 
 // ********************************************************************************************************************
 // Other functions ...
+void check_food_eaten()
+{
+	if ((And_Man_Position_Row == The_And_Position_Row) && (And_Man_Position_Column == The_And_Position_Column))
+	{
+		Score++;
+		Total_Array[And_Man_Position_Row][And_Man_Position_Column] = ++Current_And_Man_Letter_Value;
+		add_random_food();
+	}
+}
+
 void show_game()
 {
 	for (int i = 0; i < rows; i++)
@@ -167,9 +179,12 @@ int main()
 		show_game();
 		c = _getch();
 		check_pressed_key();
+		check_food_eaten();
 
 		clear_console();
 	}
+
+	cout << "Game over!\n";
 
 
 	return 0;

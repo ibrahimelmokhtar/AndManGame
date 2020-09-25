@@ -161,6 +161,14 @@ void clear_console()
 	system("cls");
 }
 
+void print_ending_message()
+{
+	cout << "Congratulations !! .. You made it :D\n";
+	cout << endl;
+	cout << "Created By :: Ibrahim El-Mokhtar" << endl;
+	cout << endl;
+}
+
 // ********************************************************************************************************************
 // The main function
 int main()
@@ -174,9 +182,16 @@ int main()
 	initialize_and_man();
 
 	// now we can start playing ...
-	while (Current_And_Man_Letter_Value != 'E')
+	while (Current_And_Man_Letter_Value < 'F')
 	{
 		show_game();
+
+		cout << endl;
+		cout << "Max. Score is : 5" << endl;
+		cout << "Your Current Score: " << Score << endl;
+		cout << endl;
+		cout << "Created By :: Ibrahim El-Mokhtar" << endl;
+
 		c = _getch();
 		check_pressed_key();
 		check_food_eaten();
@@ -184,8 +199,9 @@ int main()
 		clear_console();
 	}
 
-	cout << "Game over!\n";
-
+	// the game is finished ... printing the congratulation message now
+	clear_console();
+	print_ending_message();
 
 	return 0;
 }

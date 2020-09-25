@@ -5,4 +5,5 @@ This application was originally developed in **2015-2016** during a college cour
 
 ## What I learnt
 
-* 
+* Solidify programming concepts, i.e. conditionals, loops, ...etc.
+* Array manipulation
